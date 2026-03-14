@@ -110,6 +110,7 @@ a {
 .hero,
 .workflow-block,
 .workflow-section,
+.workflow-page,
 .privacy-page {
   margin-top: 1rem;
 }
@@ -118,6 +119,17 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  align-items: stretch;
+}
+
+.home-hero {
+  min-height: calc(100vh - 7.25rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-hero {
   align-items: stretch;
 }
 
@@ -137,6 +149,10 @@ a {
   text-align: center;
 }
 
+.home-hero .hero-copy {
+  padding: 0;
+}
+
 .preview-panel {
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
@@ -144,12 +160,45 @@ a {
   box-shadow: var(--shadow);
 }
 
+.problem-section,
 .workflow-section {
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
   background: rgba(251, 248, 242, 0.78);
   box-shadow: var(--shadow);
   padding: 1.5rem;
+}
+
+.workflow-page {
+  display: grid;
+  gap: 2.25rem;
+  margin-top: 6rem;
+}
+
+.problem-block {
+  width: 100%;
+}
+
+.problem-title,
+.workflow-title {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  font-family: "Iowan Old Style", "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.problem-copy {
+  max-width: 52rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.9rem;
+  font-size: 0.98rem;
+  text-align: center;
 }
 
 .eyebrow {
@@ -377,17 +426,13 @@ a {
   text-transform: uppercase;
 }
 
+.problem-title,
 .workflow-title {
-  width: 100%;
-  margin: 0 0 1rem;
-  text-align: center;
-  font-family: "Iowan Old Style", "Times New Roman", serif;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  font-size: clamp(1.85rem, 3.5vw, 3rem);
-  line-height: 0.98;
-  max-width: none;
-  white-space: nowrap;
+  margin-bottom: 1rem;
+}
+
+.workflow-block {
+  margin-top: 3rem;
 }
 
 .workflow-grid,
@@ -414,6 +459,10 @@ a {
 .preview-row {
   width: min(100%, 820px);
   margin: 1.4rem auto 0;
+}
+
+.upload-preview {
+  margin-top: 2.25rem;
 }
 
 .privacy-page {
@@ -550,16 +599,16 @@ a {
 
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
+  transform: translateY(34px) scale(0.985);
   transition:
-    opacity 620ms ease,
-    transform 620ms ease;
+    opacity 520ms ease,
+    transform 520ms ease;
   transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -585,7 +634,19 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .home-hero {
+    min-height: calc(100vh - 6.5rem);
+  }
+
+  .workflow-page {
+    margin-top: 4rem;
+  }
+
   .workflow-title {
+    white-space: normal;
+  }
+
+  .problem-title {
     white-space: normal;
   }
 }
@@ -623,6 +684,15 @@ a {
   .hero h1 {
     max-width: 10ch;
     font-size: clamp(2.6rem, 13vw, 4rem);
+  }
+
+  .home-hero {
+    min-height: auto;
+    padding-top: 3rem;
+  }
+
+  .workflow-page {
+    margin-top: 2.5rem;
   }
 
   .hero-line:first-child {
