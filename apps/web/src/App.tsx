@@ -119,24 +119,54 @@ function HomePage() {
 
 function MissionPage() {
   return (
-    <section className="workflow-page">
-      <Reveal as="div" className="problem-block" delay={40}>
-        <h2 className="problem-title">Problem</h2>
-        <div className="problem-section">
-          <p className="lede problem-copy">
-            Restaurants often overstock inventory to avoid running out during service. When demand
-            comes in lower than expected, that extra purchasing turns into unused ingredients,
-            wasted prep, and food that never gets sold. Without better forecasting, teams keep
-            tying up cash in excess inventory and throwing away product that could have been avoided.
-          </p>
+    <section className="mission-page">
+      <Reveal as="div" className="mission-hero" delay={40}>
+        <p className="eyebrow">Our Mission</p>
+        <h1>Food waste is unsustainable.</h1>
+        <p className="lede mission-lede">
+          Restaurants need better planning inputs so they can stock smarter, prep tighter, and
+          waste less food.
+        </p>
+      </Reveal>
+
+      <Reveal as="div" className="mission-grid" delay={80}>
+        <div className="mission-block">
+          <h2 className="mission-title">Problem</h2>
+          <article className="mission-panel mission-panel-problem">
+            <div className="mission-panel-mark" aria-hidden="true">
+              01
+            </div>
+            <div className="mission-panel-body">
+              <p className="mission-panel-intro">Inventory gets padded to avoid stockouts.</p>
+              <p>
+                To avoid stockouts, kitchens often overstock inventory. When traffic comes in lower
+                than expected, that extra purchasing turns into unused ingredients, wasted prep,
+                and food that never gets sold.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div className="mission-block">
+          <h2 className="mission-title">Our Solution</h2>
+          <article className="mission-panel mission-panel-solution">
+            <div className="mission-panel-mark" aria-hidden="true">
+              02
+            </div>
+            <div className="mission-panel-body">
+              <p className="mission-panel-intro">Forecasting should start with richer context.</p>
+              <p>
+                We combine restaurant data with weather and local events before forecasting demand.
+                That gives operators a clearer daily signal for how much to buy and prep.
+              </p>
+            </div>
+          </article>
         </div>
       </Reveal>
 
-      <Reveal as="section" className="workflow-block" delay={90}>
-        <h2 className="workflow-title">Three steps. One tighter plan.</h2>
-
+      <Reveal as="section" className="mission-workflow-block" delay={110}>
+        <h2 className="workflow-title">Our Workflow</h2>
         <div className="workflow-section">
-          <p className="eyebrow">Workflow</p>
           <div className="workflow-grid">
             {workflowSteps.map(([title, description], index) => (
               <article className="workflow-card" key={title}>
@@ -164,20 +194,44 @@ function PrivacyPage() {
       </Reveal>
 
       <Reveal as="div" className="privacy-grid" delay={80}>
-        <article className="privacy-card">
-          <h2>What stays private</h2>
-          <p>Restaurant sales, recipes, inventory records, and forecast outputs.</p>
-        </article>
+        <div className="privacy-block">
+          <div className="privacy-heading-wrap">
+            <h2 className="privacy-title">What stays private</h2>
+          </div>
+          <article className="privacy-card">
+            <p>
+              Restaurant sales, recipes, inventory records, and forecast outputs stay scoped to
+              the business using the product. One restaurant&apos;s operating history is not shared
+              across another restaurant&apos;s account.
+            </p>
+          </article>
+        </div>
 
-        <article className="privacy-card">
-          <h2>What we add</h2>
-          <p>Weather and local event signals are used to improve demand planning.</p>
-        </article>
+        <div className="privacy-block">
+          <div className="privacy-heading-wrap">
+            <h2 className="privacy-title">What we add</h2>
+          </div>
+          <article className="privacy-card">
+            <p>
+              Weather and local event signals are layered in to improve demand planning. Those
+              external signals add context around traffic shifts without replacing the restaurant
+              data that drives the forecast.
+            </p>
+          </article>
+        </div>
 
-        <article className="privacy-card">
-          <h2>Why it matters</h2>
-          <p>Restaurants should not share operational data just to get a forecast.</p>
-        </article>
+        <div className="privacy-block">
+          <div className="privacy-heading-wrap">
+            <h2 className="privacy-title">Why it matters</h2>
+          </div>
+          <article className="privacy-card">
+            <p>
+              Restaurants should not have to give up operational control just to get a forecast.
+              Clear data boundaries make the system more trustworthy for daily purchasing, prep,
+              and planning decisions.
+            </p>
+          </article>
+        </div>
       </Reveal>
     </section>
   );
