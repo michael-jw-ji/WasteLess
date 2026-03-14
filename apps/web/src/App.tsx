@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import Reveal from "./components/Reveal";
 
 const workflowSteps = [
@@ -25,7 +26,7 @@ function NavLink({
   className,
 }: {
   href: Route;
-  children: string;
+  children: ReactNode;
   className?: string;
 }) {
   return (
