@@ -5,8 +5,9 @@ from pathlib import Path
 import joblib
 from datetime import datetime, timedelta
 
-DATA_DIR = Path("data_dir")
-MODEL_DIR = Path("models_dir")
+ROOT = Path(__file__).resolve().parent
+RAW_DATA_DIR = ROOT / "data" / "raw"
+MODEL_DIR = ROOT / "models_dir"
 
 CO2E_PER_KG_FOOD = 4.5
 
@@ -44,7 +45,7 @@ def build_features(restaurant_id: str, start_date: str, end_date: str, menu_cate
     start = datetime.fromisoformat(start_date).date()
     end = datetime.fromisoformat(end_date).date()
 
-    weather = pd.read_csv(DATA_DIR / "weather.csv")
+    weather = pd.read_csv(RAW_DATA_DIR / "weather" / "weather.csv")
     weather["date"] = pd.to_datetime(weather["date"]).dt.date
     weather = weather.rename(columns={
         "tmax_c": "temp_max",
@@ -52,7 +53,7 @@ def build_features(restaurant_id: str, start_date: str, end_date: str, menu_cate
         "precip_mm": "precipitation",
     })
 
-    events = pd.read_csv(DATA_DIR / "events.csv")
+    events = pd.read_csv(RAW_DATA_DIR / "events" / "events.csv")
     events["date"] = pd.to_datetime(events["date"]).dt.date
 
     ctx = weather.merge(events, on="date", how="left")

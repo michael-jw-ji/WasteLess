@@ -1,0 +1,550 @@
+:root {
+  color-scheme: light;
+  font-family: "Suisse Intl", "Avenir Next", "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f4f1ea;
+  color: #171717;
+  --page-bg: #f4f1ea;
+  --surface: #fbf8f2;
+  --surface-strong: #111111;
+  --line: rgba(23, 23, 23, 0.12);
+  --line-strong: rgba(23, 23, 23, 0.2);
+  --muted: #5a5a56;
+  --accent: #1d5c51;
+  --accent-strong: #133f38;
+  --sand: #ddd3c5;
+  --shadow: 0 24px 60px rgba(22, 22, 22, 0.08);
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--page-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.page-shell {
+  min-height: 100vh;
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)),
+    var(--page-bg);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: min(1160px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(29, 92, 81, 0.12);
+}
+
+.topnav {
+  display: inline-flex;
+  gap: 1.1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.topnav a {
+  transition: color 180ms ease;
+}
+
+.topnav a:hover,
+.topnav a:focus-visible {
+  color: var(--accent-strong);
+}
+
+.layout {
+  width: min(1320px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero,
+.workflow-block,
+.workflow-section,
+.privacy-page {
+  margin-top: 1rem;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.hero-copy,
+.privacy-hero,
+.privacy-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hero-copy {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 2.2rem 0 1.4rem;
+  text-align: center;
+}
+
+.preview-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: rgba(251, 248, 242, 0.78);
+  box-shadow: var(--shadow);
+}
+
+.workflow-section {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: rgba(251, 248, 242, 0.78);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero h1,
+.section-heading h2 {
+  margin: 0;
+  font-family: "Iowan Old Style", "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.hero h1 {
+  max-width: 20ch;
+  margin: 0 auto;
+  font-size: clamp(3.3rem, 7vw, 6.2rem);
+  line-height: 0.94;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-line:first-child {
+  white-space: nowrap;
+}
+
+.lede,
+.workflow-card p,
+.preview-card p,
+.privacy-card p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.lede {
+  max-width: 52rem;
+  margin: 1.25rem 0 0;
+  font-size: 1.08rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin: 1.75rem 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.85rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--accent);
+  color: #f7f7f5;
+}
+
+.button-primary:hover,
+.button-primary:focus-visible {
+  background: var(--accent-strong);
+}
+
+.button-secondary {
+  border-color: var(--line-strong);
+  background: transparent;
+  color: #1d1d1b;
+}
+
+.button-secondary:hover,
+.button-secondary:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+}
+
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.stat-chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 9.5rem;
+  padding: 0.2rem 0;
+}
+
+.stat-chip + .stat-chip {
+  padding-left: 1.2rem;
+  border-left: 1px solid var(--line);
+}
+
+.stat-chip strong {
+  font-size: 1rem;
+}
+
+.stat-chip span {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.preview-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.35rem;
+}
+
+.preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.95rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.preview-head p,
+.preview-head span,
+.preview-label,
+.workflow-index {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.preview-head span,
+.preview-label,
+.workflow-index {
+  color: var(--accent);
+}
+
+.preview-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.preview-card,
+.workflow-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.preview-card {
+  min-height: 0;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.preview-card strong,
+.workflow-card h3 {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.preview-card-action {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.preview-card p {
+  margin: 0.4rem 0 0;
+}
+
+.preview-divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.1rem 0;
+}
+
+.preview-divider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  border-top: 1px solid var(--line);
+}
+
+.preview-divider span {
+  position: relative;
+  z-index: 1;
+  padding: 0 0.7rem;
+  background: var(--page-bg);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.workflow-title {
+  width: 100%;
+  margin: 0 0 1rem;
+  text-align: center;
+  font-family: "Iowan Old Style", "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: clamp(1.85rem, 3.5vw, 3rem);
+  line-height: 0.98;
+  max-width: none;
+  white-space: nowrap;
+}
+
+.workflow-grid,
+.privacy-grid {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.workflow-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.workflow-card {
+  position: relative;
+  padding: 0;
+}
+
+.workflow-card h3 {
+  margin-bottom: 0.55rem;
+  max-width: 16ch;
+}
+
+.preview-row {
+  width: min(100%, 820px);
+  margin: 1.4rem auto 0;
+}
+
+.privacy-page {
+  display: grid;
+  gap: 2rem;
+}
+
+.privacy-hero {
+  padding: 0 0 0.5rem;
+}
+
+.privacy-hero h1,
+.privacy-card h2 {
+  margin: 0;
+  font-family: "Iowan Old Style", "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.privacy-hero h1 {
+  max-width: 14ch;
+  font-size: clamp(2.7rem, 6vw, 4.8rem);
+  line-height: 0.96;
+}
+
+.privacy-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.privacy-card {
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.privacy-card h2 {
+  font-size: 1.5rem;
+  line-height: 1.05;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 620ms ease,
+    transform 620ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .button {
+    transition: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .hero,
+  .workflow-grid,
+  .privacy-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workflow-title {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar,
+  .layout {
+    width: min(100% - 1rem, 1160px);
+  }
+
+  .topbar {
+    padding-top: 0.85rem;
+  }
+
+  .topnav {
+    display: none;
+  }
+
+  .hero-copy,
+  .privacy-hero,
+  .privacy-card {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .preview-panel,
+  .preview-row {
+    padding: 1.15rem;
+  }
+
+  .workflow-section {
+    padding: 1.15rem;
+  }
+
+  .hero h1 {
+    max-width: 10ch;
+    font-size: clamp(2.6rem, 13vw, 4rem);
+  }
+
+  .hero-line:first-child {
+    white-space: normal;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .stat-chip + .stat-chip {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
