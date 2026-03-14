@@ -1,146 +1,190 @@
-const pipelineSteps = [
-  {
-    title: "Bring in your restaurant data",
-    description:
-      "Upload sales, menu, recipe, and inventory data into a private workspace scoped to your restaurant only.",
-  },
-  {
-    title: "Blend in local context",
-    description:
-      "Weather and neighborhood events add the demand signals that static spreadsheets miss.",
-  },
-  {
-    title: "Forecast prep with less waste",
-    description:
-      "Generate dish-level guidance so teams prep closer to demand and throw away less food.",
-  },
-];
+import { useEffect, useState } from "react";
+import Reveal from "./components/Reveal";
 
-const trustPoints = [
-  "Restaurant-specific forecasting workspace",
-  "Weather and local events included in demand planning",
-  "Prep decisions grounded in historical sales and recipes",
-];
+const workflowSteps = [
+  ["Private restaurant data", "Sales, recipes, and inventory stay scoped to one restaurant."],
+  ["Weather and local events", "Demand signals are layered in before the forecast is generated."],
+  ["Daily prep guidance", "Teams get a tighter prep target with less expected waste."],
+] as const;
 
-const metrics = [
-  { value: "3", label: "core inputs", detail: "sales, weather, events" },
-  { value: "1", label: "private tenant", detail: "each restaurant stays isolated" },
-  { value: "24h", label: "planning horizon", detail: "daily prep recommendations" },
-];
+const stats = [
+  { value: "Private", label: "tenant boundary" },
+  { value: "3 inputs", label: "sales, weather, events" },
+  { value: "Daily", label: "prep forecast output" },
+] as const;
 
-function App() {
+type Route = "/" | "/privacy";
+
+function getRoute(pathname: string): Route {
+  return pathname === "/privacy" ? "/privacy" : "/";
+}
+
+function NavLink({
+  href,
+  children,
+  className,
+}: {
+  href: Route;
+  children: string;
+  className?: string;
+}) {
   return (
-    <div className="page-shell">
-      <div className="ambient ambient-left" />
-      <div className="ambient ambient-right" />
+    <a
+      className={className}
+      href={href}
+      onClick={(event) => {
+        event.preventDefault();
+        window.history.pushState({}, "", href);
+        window.dispatchEvent(new PopStateEvent("popstate"));
+      }}
+    >
+      {children}
+    </a>
+  );
+}
 
-      <main className="layout">
-        <section className="hero card">
-          <div className="hero-copy">
-            <p className="eyebrow">AI food waste forecasting</p>
-            <h1>
-              Forecast demand with your own restaurant data, not someone else&apos;s averages.
-            </h1>
-            <p className="lede">
-              A restaurant-specific planning workspace that combines historical performance,
-              local weather, and nearby events to help teams prep with less waste.
-            </p>
+function HomePage() {
+  return (
+    <>
+      <Reveal as="section" className="hero" delay={40}>
+        <div className="hero-copy">
+          <p className="eyebrow">Restaurant-specific forecasting</p>
+          <h1>Prep closer to demand. Waste less.</h1>
+          <p className="lede">
+            Use restaurant data, weather, and local events to plan daily prep with more confidence.
+          </p>
 
-            <div className="hero-actions">
-              <a className="button button-primary" href="#workflow">
-                View workflow
-              </a>
-              <a className="button button-secondary" href="#why-it-matters">
-                Why it matters
-              </a>
-            </div>
-
-            <ul className="trust-list">
-              {trustPoints.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#workflow">
+              See how it works
+            </a>
+            <NavLink className="button button-secondary" href="/privacy">
+              Privacy
+            </NavLink>
           </div>
 
-          <aside className="hero-panel">
-            <div className="panel-header">
-              <span className="panel-kicker">Forecast lens</span>
-              <span className="panel-badge">restaurant scoped</span>
-            </div>
-
-            <div className="signal-grid">
-              <article className="signal-card signal-card-accent">
-                <p className="signal-label">Tonight</p>
-                <strong>Rain + hockey game nearby</strong>
-                <span>Expect sharper demand for delivery-friendly dishes.</span>
-              </article>
-              <article className="signal-card">
-                <p className="signal-label">Tomorrow</p>
-                <strong>Mild weather</strong>
-                <span>Lower soup demand, higher salad and cold drink demand.</span>
-              </article>
-              <article className="signal-card">
-                <p className="signal-label">Kitchen prep</p>
-                <strong>Dish-level recommendations</strong>
-                <span>Translate demand forecasts into prep quantities before service.</span>
-              </article>
-            </div>
-          </aside>
-        </section>
-
-        <section className="metrics" aria-label="Product metrics">
-          {metrics.map((metric) => (
-            <article className="metric card" key={metric.label}>
-              <p className="metric-value">{metric.value}</p>
-              <p className="metric-label">{metric.label}</p>
-              <p className="metric-detail">{metric.detail}</p>
-            </article>
-          ))}
-        </section>
-
-        <section className="story-grid" id="why-it-matters">
-          <article className="card story-card">
-            <p className="section-tag">Why this product</p>
-            <h2>Food waste usually starts with weak planning inputs.</h2>
-            <p>
-              Most kitchens already know their teams, dishes, and rush patterns. What they lack
-              is a clean system that pulls sales history together with outside demand drivers before
-              prep decisions are made.
-            </p>
-          </article>
-
-          <article className="card story-card story-card-highlight">
-            <p className="section-tag">What makes it different</p>
-            <h2>Each restaurant keeps its own data boundary.</h2>
-            <p>
-              The product is designed around tenant isolation. One restaurant&apos;s menu,
-              historical sales, or forecasts never become another restaurant&apos;s training data.
-            </p>
-          </article>
-        </section>
-
-        <section className="workflow card" id="workflow">
-          <div className="workflow-heading">
-            <p className="section-tag">Workflow</p>
-            <h2>How the homepage frames the product story</h2>
-            <p>
-              The interface should quickly explain the three things your users care about: what
-              data they bring, what outside signals you add, and what operational decision they get
-              back.
-            </p>
-          </div>
-
-          <div className="workflow-steps">
-            {pipelineSteps.map((step, index) => (
-              <article className="step-card" key={step.title}>
-                <span className="step-index">0{index + 1}</span>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
-              </article>
+          <div className="stat-row" aria-label="Key product facts">
+            {stats.map((stat) => (
+              <div className="stat-chip" key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </div>
             ))}
           </div>
-        </section>
-      </main>
+        </div>
+
+        <div className="preview-panel" aria-label="Forecast preview">
+          <div className="preview-head">
+            <p>Forecast preview</p>
+            <span>Today</span>
+          </div>
+
+          <div className="preview-grid">
+            <article className="preview-card">
+              <span className="preview-label">Weather</span>
+              <strong>Rain tonight</strong>
+              <p>Cooler conditions may push up dinner demand.</p>
+            </article>
+
+            <article className="preview-card">
+              <span className="preview-label">Events</span>
+              <strong>Arena event nearby</strong>
+              <p>More foot traffic can shift demand later into the evening.</p>
+            </article>
+
+            <div className="preview-divider" aria-hidden="true">
+              <span>Result</span>
+            </div>
+
+            <article className="preview-card preview-card-action">
+              <span className="preview-label">Action</span>
+              <strong>Prep 14% closer to expected demand</strong>
+              <p>Tighten purchase and prep quantities before service.</p>
+            </article>
+          </div>
+        </div>
+      </Reveal>
+
+      <Reveal as="section" className="workflow-section" id="workflow" delay={80}>
+        <div className="section-heading">
+          <p className="eyebrow">Workflow</p>
+          <h2>Three steps. One tighter plan.</h2>
+        </div>
+
+        <div className="workflow-grid">
+          {workflowSteps.map(([title, description], index) => (
+            <article className="workflow-card" key={title}>
+              <span className="workflow-index">0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </Reveal>
+
+      <Reveal as="section" className="compact-note" delay={120}>
+        <p className="eyebrow">Built for operators</p>
+        <h2>Short page. Clear signal. Practical output.</h2>
+      </Reveal>
+    </>
+  );
+}
+
+function PrivacyPage() {
+  return (
+    <section className="privacy-page">
+      <Reveal as="div" className="privacy-hero" delay={40}>
+        <p className="eyebrow">Privacy</p>
+        <h1>Your restaurant keeps its own data boundary.</h1>
+        <p className="lede">
+          Menus, sales history, and forecasts stay scoped to the restaurant using the product.
+        </p>
+      </Reveal>
+
+      <Reveal as="div" className="privacy-grid" delay={80}>
+        <article className="privacy-card">
+          <h2>What stays private</h2>
+          <p>Restaurant sales, recipes, inventory records, and forecast outputs.</p>
+        </article>
+
+        <article className="privacy-card">
+          <h2>What we add</h2>
+          <p>Weather and local event signals are used to improve demand planning.</p>
+        </article>
+
+        <article className="privacy-card">
+          <h2>Why it matters</h2>
+          <p>Restaurants should not share operational data just to get a forecast.</p>
+        </article>
+      </Reveal>
+    </section>
+  );
+}
+
+function App() {
+  const [route, setRoute] = useState<Route>(() => getRoute(window.location.pathname));
+
+  useEffect(() => {
+    const handleRouteChange = () => setRoute(getRoute(window.location.pathname));
+
+    window.addEventListener("popstate", handleRouteChange);
+    return () => window.removeEventListener("popstate", handleRouteChange);
+  }, []);
+
+  return (
+    <div className="page-shell">
+      <header className="topbar">
+        <NavLink className="brand" href="/">
+          <span className="brand-mark" aria-hidden="true" />
+          <span>Kitchen Forecast</span>
+        </NavLink>
+        <nav className="topnav" aria-label="Homepage">
+          {route === "/" ? <a href="#workflow">Workflow</a> : <NavLink href="/">Home</NavLink>}
+          <NavLink href="/privacy">Privacy</NavLink>
+        </nav>
+      </header>
+
+      <main className="layout">{route === "/privacy" ? <PrivacyPage /> : <HomePage />}</main>
     </div>
   );
 }
