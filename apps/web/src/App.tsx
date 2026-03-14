@@ -13,10 +13,12 @@ const stats = [
   { value: "Daily", label: "prep forecast output" },
 ] as const;
 
-type Route = "/" | "/privacy";
+type Route = "/" | "/privacy" | "/upload";
 
 function getRoute(pathname: string): Route {
-  return pathname === "/privacy" ? "/privacy" : "/";
+  if (pathname === "/privacy") return "/privacy";
+  if (pathname === "/upload") return "/upload";
+  return "/";
 }
 
 function NavLink({
@@ -158,6 +160,124 @@ function PrivacyPage() {
   );
 }
 
+function UploadPage() {
+  const [file, setFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<"idle" | "uploading" | "error" | "done">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [results, setResults] = useState<
+    { date: string; dish_name: string; category: string; qty_sold: number; predicted_qty_used_kg: number }[]
+  >([]);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!file) {
+      setError("Please select a CSV file first.");
+      return;
+    }
+
+    setStatus("uploading");
+    setError(null);
+    setResults([]);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const resp = await fetch("http://localhost:8000/api/upload-sales", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!resp.ok) {
+        let message = `Upload failed with status ${resp.status}`;
+        try {
+          const payload = await resp.json();
+          if (payload?.detail) {
+            message = payload.detail;
+          }
+        } catch {
+          // ignore JSON parse errors
+        }
+        throw new Error(message);
+      }
+
+      const data = await resp.json();
+      setResults(data.rows ?? []);
+      setStatus("done");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Something went wrong while uploading.";
+      setError(message);
+      setStatus("error");
+    }
+  };
+
+  return (
+    <section className="hero">
+      <div className="hero-copy">
+        <h1>
+          <span className="hero-line">Upload sales CSV.</span>
+          <span className="hero-line">See the forecast.</span>
+        </h1>
+        <p className="lede">
+          Drop in a CSV in the expected format and we&apos;ll run it through the trained model to estimate usage.
+        </p>
+
+        <form className="upload-card" onSubmit={handleSubmit}>
+          <label className="upload-field">
+            <span className="field-label">Sales CSV</span>
+            <input
+              type="file"
+              accept=".csv,text/csv"
+              onChange={(event) => {
+                const next = event.target.files?.[0] ?? null;
+                setFile(next);
+              }}
+            />
+          </label>
+          <p className="field-help">
+            Expected columns:{" "}
+            <code>date, dish_id, dish_name, category, qty_sold, restaurant_id, price</code>.
+          </p>
+          <button className="button button-primary" type="submit" disabled={status === "uploading"}>
+            {status === "uploading" ? "Uploading…" : "Run forecast"}
+          </button>
+          {error && <p className="error-text">{error}</p>}
+        </form>
+
+        {results.length > 0 && (
+          <div className="upload-results">
+            <h2>Predicted usage</h2>
+            <div className="upload-results-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Dish</th>
+                    <th>Category</th>
+                    <th>Qty sold</th>
+                    <th>Predicted qty used (kg)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {results.map((row, index) => (
+                    <tr key={`${row.date}-${row.dish_name}-${index}`}>
+                      <td>{row.date}</td>
+                      <td>{row.dish_name}</td>
+                      <td>{row.category}</td>
+                      <td>{row.qty_sold}</td>
+                      <td>{row.predicted_qty_used_kg.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [route, setRoute] = useState<Route>(() => getRoute(window.location.pathname));
 
@@ -177,11 +297,20 @@ function App() {
         </NavLink>
         <nav className="topnav" aria-label="Homepage">
           {route === "/" ? <a href="#workflow">Workflow</a> : <NavLink href="/">Home</NavLink>}
+          <NavLink href="/upload">Upload CSV</NavLink>
           <NavLink href="/privacy">Privacy</NavLink>
         </nav>
       </header>
 
-      <main className="layout">{route === "/privacy" ? <PrivacyPage /> : <HomePage />}</main>
+      <main className="layout">
+        {route === "/privacy" ? (
+          <PrivacyPage />
+        ) : route === "/upload" ? (
+          <UploadPage />
+        ) : (
+          <HomePage />
+        )}
+      </main>
     </div>
   );
 }

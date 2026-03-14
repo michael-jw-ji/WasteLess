@@ -454,6 +454,100 @@ a {
   line-height: 1.05;
 }
 
+.upload-card {
+  margin: 2rem auto 0;
+  max-width: 560px;
+  padding: 1.5rem 1.75rem 1.75rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: rgba(251, 248, 242, 0.92);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  align-items: stretch;
+}
+
+.upload-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field-help {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.field-help code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  font-size: 0.84rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 999px;
+  background: #ebe2d4;
+}
+
+.error-text {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #b3261e;
+}
+
+.upload-results {
+  margin: 2.5rem auto 0;
+  max-width: 880px;
+  padding: 1.4rem 1.7rem 1.6rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--line);
+  background: rgba(251, 248, 242, 0.92);
+  box-shadow: var(--shadow);
+}
+
+.upload-results h2 {
+  margin: 0 0 0.75rem;
+  font-family: "Iowan Old Style", "Times New Roman", serif;
+  font-size: 1.4rem;
+}
+
+.upload-results-scroll {
+  max-height: 320px;
+  overflow: auto;
+}
+
+.upload-results table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.upload-results th,
+.upload-results td {
+  padding: 0.35rem 0.4rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(23, 23, 23, 0.06);
+}
+
+.upload-results th {
+  position: sticky;
+  top: 0;
+  background: rgba(251, 248, 242, 0.98);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(26px);
