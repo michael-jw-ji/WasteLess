@@ -2,8 +2,10 @@ import pandas as pd
 from pathlib import Path
 
 # ---------- CONFIG ----------
-DATA_DIR = Path("data_dir")
-OUT_PATH = DATA_DIR / "restaurant_inventory_waste_joined.csv"
+ROOT = Path(__file__).resolve().parent
+RAW_DATA_DIR = ROOT / "data" / "raw"
+PROCESSED_DATA_DIR = ROOT / "data" / "processed"
+OUT_PATH = PROCESSED_DATA_DIR / "restaurant_inventory_waste_joined.csv"
 CO2E_PER_KG_FOOD = 4.5  # kg CO2e per kg wasted food
 
 KG_PER_PORTION = {
@@ -17,16 +19,16 @@ KG_PER_PORTION = {
 # ---------- LOAD RAW DATA ----------
 
 # Normalized sales CSV you just created
-sales = pd.read_csv(DATA_DIR / "sales.csv")
+sales = pd.read_csv(PROCESSED_DATA_DIR / "sales.csv")
 
 # Trevin Hannibal food wastage data
-waste_raw = pd.read_csv(DATA_DIR / "food_wastage_data.csv")  # ensure name matches download[web:76]
+waste_raw = pd.read_csv(RAW_DATA_DIR / "waste" / "food_wastage_data.csv")
 
 # Weather CSV (your Toronto weather file, already renamed)
-weather = pd.read_csv(DATA_DIR / "weather.csv")
+weather = pd.read_csv(RAW_DATA_DIR / "weather" / "weather.csv")
 
 # Events CSV (can be synthetic, just needs date, events_count, expected_attendance_total)
-events = pd.read_csv(DATA_DIR / "events.csv")
+events = pd.read_csv(RAW_DATA_DIR / "events" / "events.csv")
 
 # ---------- CLEAN / NORMALIZE ----------
 

@@ -6,11 +6,12 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 import joblib
 
-DATA_DIR = Path("data_dir")
-MODEL_DIR = Path("models_dir")
+ROOT = Path(__file__).resolve().parent
+PROCESSED_DATA_DIR = ROOT / "data" / "processed"
+MODEL_DIR = ROOT / "models_dir"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
-df = pd.read_csv(DATA_DIR / "restaurant_inventory_waste_joined.csv")
+df = pd.read_csv(PROCESSED_DATA_DIR / "restaurant_inventory_waste_joined.csv")
 
 df["date"] = pd.to_datetime(df["date"])
 df["day_of_week"] = df["date"].dt.weekday
