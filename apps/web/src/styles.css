@@ -221,6 +221,12 @@ a {
   margin: 1.75rem 0;
 }
 
+.hero-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -240,6 +246,12 @@ a {
 .button:hover,
 .button:focus-visible {
   transform: translateY(-1px);
+}
+
+.button-cta {
+  min-height: 3.35rem;
+  padding: 0.95rem 1.6rem;
+  font-size: 1rem;
 }
 
 .button-primary {
@@ -269,6 +281,7 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.2rem;
+  margin-top: 1.85rem;
 }
 
 .stat-chip {

@@ -9,9 +9,9 @@ const workflowSteps = [
 ] as const;
 
 const stats = [
-  { value: "Private", label: "tenant boundary" },
-  { value: "3 inputs", label: "sales, weather, events" },
-  { value: "Daily", label: "prep forecast output" },
+  { value: "Less prep", label: "" },
+  { value: "Less waste", label: "" },
+  { value: "Better sustainability", label: "" },
 ] as const;
 
 const NAVIGATE_EVENT = "app:navigate";
@@ -96,15 +96,6 @@ function HomePage() {
           Use restaurant data, weather, and local events to plan daily prep with more confidence.
         </p>
 
-        <div className="hero-actions">
-          <NavLink className="button button-primary" href="/mission">
-            See how it works
-          </NavLink>
-          <NavLink className="button button-secondary" href="/privacy">
-            Privacy
-          </NavLink>
-        </div>
-
         <div className="stat-row" aria-label="Key product facts">
           {stats.map((stat) => (
             <div className="stat-chip" key={stat.label}>
@@ -112,6 +103,12 @@ function HomePage() {
               <span>{stat.label}</span>
             </div>
           ))}
+        </div>
+
+        <div className="hero-cta-row">
+          <NavLink className="button button-primary button-cta" href="/upload">
+            Upload your data
+          </NavLink>
         </div>
       </div>
     </Reveal>
@@ -188,7 +185,7 @@ function PrivacyPage() {
     <section className="privacy-page">
       <Reveal as="div" className="privacy-hero" delay={40}>
         <p className="eyebrow">Privacy</p>
-        <h1>Your restaurant keeps its own data boundary.</h1>
+        <h1>Your restaurant, your data.</h1>
         <p className="lede">
           Menus, sales history, and forecasts stay scoped to the restaurant using the product.
         </p>
