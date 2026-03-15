@@ -392,7 +392,12 @@ function App() {
     <div className="page-shell">
       <header className="topbar">
         <NavLink className="brand" href="/">
-          <span className="brand-mark" aria-hidden="true" />
+          <span className="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" role="presentation">
+              <path d="M6.5 8.5L11 23.5L16 12.5L21 23.5L25.5 8.5" />
+              <path d="M21.8 6.9C23.1 4.8 25.1 4.2 27 4.5C26.6 6.6 25.1 8.5 22.8 9.1" />
+            </svg>
+          </span>
           <span>WasteLess</span>
         </NavLink>
         <nav className="topnav" aria-label="Homepage">

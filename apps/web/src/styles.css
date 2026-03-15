@@ -77,11 +77,30 @@ a {
 }
 
 .brand-mark {
-  width: 0.9rem;
-  height: 0.9rem;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 0 6px rgba(29, 92, 81, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid rgba(29, 92, 81, 0.18);
+  border-radius: 0.7rem;
+  background: rgba(251, 248, 242, 0.92);
+  box-shadow:
+    0 8px 22px rgba(22, 22, 22, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.brand-mark svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.brand-mark path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .topnav {
