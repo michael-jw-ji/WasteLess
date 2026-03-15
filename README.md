@@ -1,4 +1,4 @@
-# AI Food Waste Forecasting
+# WasteLess
 
 ## Problem
 Restaurants often prepare more food than needed, which leads to unnecessary food waste, higher costs, and avoidable environmental impact.

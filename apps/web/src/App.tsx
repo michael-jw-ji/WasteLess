@@ -393,7 +393,7 @@ function App() {
       <header className="topbar">
         <NavLink className="brand" href="/">
           <span className="brand-mark" aria-hidden="true" />
-          <span>Kitchen Forecast</span>
+          <span>WasteLess</span>
         </NavLink>
         <nav className="topnav" aria-label="Homepage">
           <NavLink href="/">Home</NavLink>
